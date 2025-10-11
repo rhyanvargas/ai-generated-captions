@@ -9,9 +9,9 @@ export default function Home() {
 						AI Video Caption Generator
 					</h1>
 					<p className="text-lg text-gray-600 max-w-2xl mx-auto">
-						"The Simple, Open-Source Caption Generator for Developers and
-						Creators. <br /> Bring Your Own Model (BYOM)"
-					</p>
+					The Simple, Open-Source Caption Generator for Developers and
+					Creators. <br /> Bring Your Own Model (BYOM)
+				</p>
 				</div>
 				<VideoCaptionGenerator />
 			</div>

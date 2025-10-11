@@ -9,7 +9,8 @@ interface CaptionResult {
  * Generate a realistic mock transcript based on input type
  * This simulates what would come from a real transcription service
  */
-function generateMockTranscript(inputType: string, videoIdentifier: string): string {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function generateMockTranscript(_inputType: string, _videoIdentifier: string): string {
     const mockTranscripts = [
         "Welcome to this video tutorial. Today we're going to explore some exciting concepts.",
         "Let's dive right into the main topic and see what we can learn together.",

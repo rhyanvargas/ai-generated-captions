@@ -87,7 +87,11 @@ export function VideoCaptionGenerator() {
       setStage('transcribing')
 
       // Prepare request data
-      const requestData: any = {
+      const requestData: {
+        inputType: string
+        videoUrl?: string
+        fileData?: string
+      } = {
         inputType: inputMode,
       }
 
