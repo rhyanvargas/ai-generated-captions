@@ -41,17 +41,21 @@ Implement proper binary file upload handling to replace the current placeholder 
 - Verify file integrity after upload
 - Return validation errors to frontend
 
-### 5. Update Error Handling
-- Handle upload failures gracefully
-- Show upload progress to user
-- Add retry logic for network interruptions
-- Clean up partial uploads on errors
+### 5. Write Vitest Tests (REQUIRED)
+- Create component tests in `src/components/__tests__/video-caption-generator.test.tsx`
+- Test file upload interaction (file select, drag-drop)
+- Test FormData creation and submission
+- Test error states (invalid file, too large)
+- Test API route file handling
+- **All tests must pass before feature is complete**
 
 ## Success Criteria
 - ✅ Large video files (up to 500MB) upload successfully
 - ✅ Files stored temporarily and cleaned up after processing
 - ✅ Upload progress shown to user
 - ✅ Invalid files rejected with clear error messages
+- ✅ **Vitest tests written and passing** (see `testing-guidelines.md`)
+- ✅ Component tests cover user interactions
 - ✅ No memory issues with large file uploads
 
 ## Technical Notes

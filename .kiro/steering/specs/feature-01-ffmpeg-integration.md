@@ -41,18 +41,21 @@ Integrate FFmpeg to extract audio from uploaded video files and video URLs, repl
 - Return user-friendly error messages
 - Log FFmpeg errors for debugging
 
-### 5. Update Documentation
-- Add FFmpeg installation instructions to README
-- Document supported video formats
-- Add troubleshooting section for FFmpeg issues
-- Update system requirements section
+### 5. Write Vitest Tests (REQUIRED)
+- Create `src/lib/__tests__/audio-extractor.test.ts`
+- Test successful audio extraction from sample video
+- Test cleanup of temporary files
+- Test error handling for invalid files
+- Test timeout for long extractions
+- **All tests must pass before feature is complete**
 
 ## Success Criteria
 - ✅ Audio successfully extracted from MP4, MOV, AVI files
 - ✅ Temporary files cleaned up after processing
 - ✅ Errors handled with clear user feedback
+- ✅ **Vitest tests written and passing** (see `testing-guidelines.md`)
+- ✅ Test coverage ≥ 80% for audio-extractor module
 - ✅ Documentation updated with setup instructions
-- ✅ Tests pass for common video formats
 
 ## Technical Notes
 - Use WAV format at 16kHz sample rate (optimal for Whisper)

@@ -98,13 +98,27 @@ Feature 13 (Webhooks)
 - **Phase 3**: 12-15 hours
 - **Total**: 43-54 hours
 
+## Testing Requirements ⚠️
+
+**CRITICAL RULE**: Every feature MUST include Vitest tests that pass before marking the feature complete.
+
+- All features now include a "Write Vitest Tests (REQUIRED)" task
+- Tests must achieve ≥80% coverage for new modules
+- Run `pnpm test:run` before committing any feature
+- See `testing-guidelines.md` for complete testing standards
+
+**No exceptions**: Tests are not optional. They ensure code quality, prevent regressions, and document expected behavior.
+
+---
+
 ## How to Use This Index
 
-1. **Review** each feature document in `.kiro/steering/`
+1. **Review** each feature document in `.kiro/steering/specs/`
 2. **Prioritize** based on your project needs
 3. **Implement** one feature per commit
-4. **Test** thoroughly before moving to next feature
-5. **Update** feature status as you progress
+4. **Write tests** for the feature (required)
+5. **Run tests** - `pnpm test:run` must pass
+6. **Update** feature status as you progress
 
 ## Feature Document Format
 
