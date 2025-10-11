@@ -28,27 +28,39 @@ This ensures:
 ## Test Requirements by Feature Type
 
 ### Backend/API Features
-**Required Tests**:
 1. **Unit Tests** - Core logic functions
 2. **Integration Tests** - API route end-to-end
 3. **Error Handling** - All error paths tested
 4. **Edge Cases** - Boundary conditions
 
 **Example**: Feature 01 (FFmpeg Audio Extraction)
+
+**Test File JSDoc (Recommended)**
+
+Document your test files and complex test cases with JSDoc for better maintainability:
+
 ```typescript
-// src/lib/__tests__/audio-extractor.test.ts
-import { describe, it, expect, beforeAll, afterAll } from 'vitest'
-import { extractAudio, cleanupAudioFile } from '../audio-extractor'
-import { existsSync } from 'fs'
+/**
+ * Tests for audio extraction functionality.
+ * Requires FFmpeg to be installed on the system.
+ * 
+ * @group unit
+ * @requires ffmpeg
+ */
 
 describe('audio-extractor', () => {
+  /**
+   * Verifies audio is extracted in correct format (16kHz mono WAV).
+   * This ensures compatibility with Whisper's audio requirements.
+   */
   it('should extract audio from video file', async () => {
-    const audioPath = await extractAudio('test/fixtures/sample.mp4')
-    expect(existsSync(audioPath)).toBe(true)
-    expect(audioPath).toMatch(/\.wav$/)
-    await cleanupAudioFile(audioPath)
+    // ...
   })
-
+  
+  /**
+   * Tests cleanup function removes temporary files.
+   * Prevents disk space issues from accumulated temp files.
+   */
   it('should handle invalid video file', async () => {
     await expect(extractAudio('invalid.mp4')).rejects.toThrow()
   })

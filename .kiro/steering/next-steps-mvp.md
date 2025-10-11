@@ -65,23 +65,45 @@ sudo apt-get install ffmpeg
 # Download from https://ffmpeg.org/download.html
 ```
 
+---
+
 ### Step 2: Feature 01 - Audio Extraction (3-4 hours including tests)
 
 **Create**: `src/lib/audio-extractor.ts`
 
 ```typescript
+/**
+ * Audio extraction utilities using FFmpeg.
+ * Converts video files to 16kHz mono WAV for Whisper transcription.
+ * 
+ * @module lib/audio-extractor
+ */
+
 import ffmpeg from 'fluent-ffmpeg'
 import { tmpdir } from 'os'
 import { join } from 'path'
 import { unlink } from 'fs/promises'
 
+/**
+ * Extracts audio from video file using FFmpeg.
+ * Converts to 16kHz mono WAV format optimal for Whisper API.
+ * 
+ * @param videoPath - Absolute path to video file
+ * @returns Promise resolving to path of extracted WAV audio file
+ * @throws {Error} If FFmpeg fails or video format unsupported
+ * @example
+ * ```typescript
+ * const audioPath = await extractAudio('/tmp/video.mp4')
+ * // Returns: '/tmp/audio-1698765432100.wav'
+ * ```
+ */
 export async function extractAudio(videoPath: string): Promise<string> {
   const outputPath = join(tmpdir(), `audio-${Date.now()}.wav`)
   
   return new Promise((resolve, reject) => {
     ffmpeg(videoPath)
-      .audioFrequency(16000) // Optimal for Whisper
-      .audioChannels(1)       // Mono
+      .audioFrequency(16000)  // Whisper optimal sample rate
+      .audioChannels(1)        // Mono
       .format('wav')
       .on('end', () => resolve(outputPath))
       .on('error', reject)
@@ -89,6 +111,13 @@ export async function extractAudio(videoPath: string): Promise<string> {
   })
 }
 
+/**
+ * Removes temporary audio file from disk.
+ * Fails silently if file doesn't exist or cannot be deleted.
+ * 
+ * @param audioPath - Path to audio file to delete
+ * @returns Promise that resolves when cleanup completes
+ */
 export async function cleanupAudioFile(audioPath: string): Promise<void> {
   try {
     await unlink(audioPath)

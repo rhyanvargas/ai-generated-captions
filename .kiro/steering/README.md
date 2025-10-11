@@ -8,45 +8,46 @@
 
 ## 📚 Documentation Index
 
-### Core Strategy Documents
+### ⚠️ Core Foundation Documents (READ THESE FIRST)
 
-1. **[mvp-roadmap.md](mvp-roadmap.md)**  
-   Complete MVP strategy, BYOM philosophy, timeline, and success criteria.  
-   *Start here for project overview.*
+These 4 documents define how the project works and how you should work on it:
 
-2. **[next-steps-mvp.md](next-steps-mvp.md)**  
-   Step-by-step implementation guide with code examples and testing instructions.  
-   *Your immediate action plan.*
+1. **[tech.md](tech.md)** - Technology Stack  
+   Framework, tools, dependencies, testing setup, and build commands.
 
-3. **[testing-guidelines.md](testing-guidelines.md)** ⚠️  
-   **CRITICAL**: Testing requirements, setup, examples, and standards.  
-   All features require passing Vitest tests (≥80% coverage).
+2. **[structure.md](structure.md)** - Project Structure & Coding Standards  
+   Code organization, JSDoc requirements, TypeScript standards, testing patterns.
 
-### Feature Specifications
+3. **[product.md](product.md)** - Product Strategy & Vision  
+   BYOM philosophy, competitive positioning, roadmap, and success metrics.
 
-4. **[specs/features-index.md](specs/features-index.md)**  
-   All 13 planned features with priorities, dependencies, and effort estimates.
+4. **[documentation.md](documentation.md)** - Documentation Standards  
+   README maintenance, changelog practices, code documentation guidelines.
 
-5. **[specs/feature-01-ffmpeg-integration.md](specs/feature-01-ffmpeg-integration.md)**  
-   Audio extraction from videos (First MVP feature - 3-4 hours)
+### 📋 Active Working Documents
 
-6. **[specs/feature-02-whisper-api-integration.md](specs/feature-02-whisper-api-integration.md)**  
-   Whisper transcription via AI SDK v5 (Second MVP feature - 2-3 hours)
+5. **[next-steps-mvp.md](next-steps-mvp.md)**  
+   Step-by-step implementation guide with code examples.  
+   *Your immediate action plan for MVP.*
 
-7. **[specs/feature-03-file-upload-binary-handling.md](specs/feature-03-file-upload-binary-handling.md)**  
-   Binary file upload with FormData (Third MVP feature - 2-3 hours)
+6. **[testing-guidelines.md](testing-guidelines.md)**  
+   Complete Vitest setup, testing patterns, and coverage requirements.
 
-8. **[specs/feature-04+](specs/)** - Future features (post-MVP)
+7. **[coding-standards.md](coding-standards.md)**  
+   Extended JSDoc guidelines, VSCode integration, and enforcement rules.
 
-### Future Planning
+8. **[changelog.md](changelog.md)**  
+   Living document of improvements, learnings, and before/after examples.
 
-9. **[future-containerization-cloud.md](future-containerization-cloud.md)**  
-   Docker setup (post-MVP) and cloud hosted service plans (future project).
+### 📦 Feature Specifications
 
-### Market Research
+**Location**: `.kiro/specs/` directory (separate from steering)
 
-10. **[competitive-analysis-maestra.md](competitive-analysis-maestra.md)** *(if created)*  
-    Competitive analysis vs. Maestra.ai and positioning strategy.
+- **[../specs/features-index.md](../specs/features-index.md)** - All 13 planned features
+- **[../specs/feature-01-ffmpeg-integration.md](../specs/feature-01-ffmpeg-integration.md)** - Audio extraction
+- **[../specs/feature-02-whisper-api-integration.md](../specs/feature-02-whisper-api-integration.md)** - Whisper transcription
+- **[../specs/feature-03-file-upload-binary-handling.md](../specs/feature-03-file-upload-binary-handling.md)** - File upload
+- **[../specs/feature-04+](../specs/)** - Future features (04-13)
 
 ---
 
@@ -108,25 +109,31 @@ See `next-steps-mvp.md` for detailed implementation.
 
 ## 📋 Essential Rules
 
-### 1. Testing is Mandatory ⚠️
+### 1. JSDoc Everything ⚠️
+- All exported functions must have JSDoc
+- Include `@param`, `@returns`, `@throws`, `@example`
+- Document complex logic and edge cases
+- See `coding-standards.md`
+
+### 2. Testing is Mandatory ⚠️
 - Write tests for every feature
 - Run `pnpm test:run` before committing
 - Maintain ≥80% coverage
 - See `testing-guidelines.md`
 
-### 2. One Feature Per Commit
+### 3. One Feature Per Commit
 - Each feature is a single atomic commit
-- Complete all tasks including tests
+- Complete all tasks including tests and JSDoc
 - Update documentation
 - Mark feature status as done
 
-### 3. BYOM Philosophy
+### 4. BYOM Philosophy
 - Users bring their own API keys
 - No hardcoded credentials
 - Support mock mode without keys
 - Document API key setup clearly
 
-### 4. Keep It Simple
+### 5. Keep It Simple
 - Minimal code to solve the problem
 - Avoid over-engineering
 - Prefer readability over cleverness

@@ -24,9 +24,29 @@ Integrate OpenAI Whisper transcription using AI SDK v5, enabling users to bring 
 
 ### 2. Create Transcription Utility (src/lib/transcription.ts)
 ```typescript
+/**
+ * Audio transcription utilities using OpenAI Whisper via AI SDK.
+ * @module lib/transcription
+ */
+
 import { experimental_transcribe as transcribe } from 'ai'
 import { openai } from '@ai-sdk/openai'
+import { readFile } from 'fs/promises'
 
+/**
+ * Transcribes audio file using OpenAI Whisper API.
+ * Returns transcript with timing segments for VTT formatting.
+ * 
+ * @param audioPath - Absolute path to audio file (WAV format, 16kHz)
+ * @returns Promise resolving to transcription result with segments
+ * @throws {Error} If API fails or file cannot be read
+ * @example
+ * ```typescript
+ * const result = await transcribeAudio('/tmp/audio.wav')
+ * console.log(result.text) // Full transcript
+ * console.log(result.segments) // Timed segments for VTT
+ * ```
+ */
 export async function transcribeAudio(audioPath: string) {
   const audioBuffer = await readFile(audioPath)
   

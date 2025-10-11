@@ -24,9 +24,10 @@ Integrate FFmpeg to extract audio from uploaded video files and video URLs, repl
 - Create environment variable for FFmpeg path (optional)
 
 ### 2. Create Audio Extraction Utility
-- Create `src/lib/audio-extractor.ts` module
-- Implement `extractAudioFromFile()` function
-- Implement `extractAudioFromUrl()` function (download video first)
+- Create `src/lib/audio-extractor.ts` module with file header JSDoc
+- Implement `extractAudio()` function with complete JSDoc documentation
+- Include `@param`, `@returns`, `@throws`, and `@example` tags
+- Implement `cleanupAudioFile()` with JSDoc
 - Return path to extracted WAV file
 
 ### 3. Integrate with API Route
