@@ -4,20 +4,22 @@ A Next.js application that automatically generates video captions in both TXT an
 
 ## Features
 
-- 🎥 **Video Upload**: Drag & drop or click to upload video files
-- 🤖 **AI Transcription**: Uses OpenAI's GPT-4 to generate and clean up captions
+- 🎥 **Dual Input Methods**: Upload video files OR paste video URLs
+- 🔗 **Video URL Support**: Process videos directly from web links
+- 🤖 **Mock Transcription**: Generates realistic caption demos (production-ready for FFmpeg + Whisper integration)
 - 📝 **Multiple Formats**: Outputs both plain text (.txt) and WebVTT (.vtt) formats
 - 🎨 **Smooth Progress UI**: Beautiful progress indicators showing processing stages
 - 📋 **Copy & Download**: Easy copy to clipboard and download functionality
 - 📱 **Responsive Design**: Works on desktop and mobile devices
+- ✅ **URL Validation**: Smart validation for video URLs with error handling
 
 ## Tech Stack
 
 - **Next.js 15** - React framework with App Router
-- **AI SDK** - For AI-powered transcription and text processing
 - **shadcn/ui** - Beautiful, accessible UI components
 - **Tailwind CSS** - Utility-first CSS framework
 - **TypeScript** - Type-safe development
+- **Mock Transcription** - Ready for FFmpeg + OpenAI Whisper integration
 
 ## Setup
 
@@ -26,26 +28,31 @@ A Next.js application that automatically generates video captions in both TXT an
    pnpm install
    ```
 
-2. **Set up environment variables:**
-   Create a `.env.local` file and add your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_openai_api_key_here
-   ```
-
-3. **Run the development server:**
+2. **Run the development server:**
    ```bash
    pnpm dev
    ```
 
-4. **Open your browser:**
+3. **Open your browser:**
    Navigate to [http://localhost:3000](http://localhost:3000)
+
+> **Note**: The app currently runs in **mock mode** and doesn't require any API keys. It generates realistic demo captions to showcase the UI/UX. See [Production Setup](#production-setup) below for real transcription integration.
 
 ## Usage
 
-1. **Upload a Video**: Drag and drop a video file or click to browse
-2. **Generate Captions**: Click "Generate Captions" to start the AI processing
-3. **View Progress**: Watch the smooth progress indicator as it processes your video
-4. **Download Results**: Copy to clipboard or download the generated caption files
+### Method 1: File Upload
+1. **Choose "Upload File"** tab in the interface
+2. **Upload a Video**: Drag and drop a video file or click to browse
+3. **Generate Captions**: Click "Generate Captions" to start processing
+
+### Method 2: Video URL
+1. **Choose "Video URL"** tab in the interface  
+2. **Paste Video URL**: Enter a direct link to your video file
+3. **Generate Captions**: Click "Generate Captions from URL" to start processing
+
+### Results
+4. **View Progress**: Watch the smooth progress indicator as it processes your video
+5. **Download Results**: Copy to clipboard or download the generated caption files in both TXT and VTT formats
 
 ## File Formats
 
@@ -61,13 +68,29 @@ Web Video Text Tracks format with timestamps, ideal for:
 - YouTube captions
 - Web-based video platforms
 
-## Current Implementation
+## Implementation Status
 
-The current version uses a mock transcription system for demonstration. In a production environment, you would:
+### ✅ **Completed Features**
+- [x] **UI/UX**: Complete interface with drag & drop, URL input, progress indicators
+- [x] **Dual Input Methods**: File upload and video URL support with mode switching
+- [x] **API Architecture**: Production-ready `/api/generate-captions` endpoint
+- [x] **AI Integration**: OpenAI GPT-4 for transcript cleanup and improvement
+- [x] **Format Generation**: Complete TXT and WebVTT output with proper timestamps
+- [x] **User Actions**: Copy to clipboard, download files, error handling
+- [x] **Responsive Design**: Works on desktop and mobile devices
 
-1. **Extract Audio**: Use FFmpeg to extract audio from video files
-2. **Transcribe Audio**: Use OpenAI Whisper API or similar for accurate transcription
-3. **Generate Timestamps**: Create precise timing information for captions
+### 🚧 **In Progress / Next Steps**
+- [ ] **Audio Extraction**: FFmpeg integration for video → audio conversion
+- [ ] **Speech-to-Text**: OpenAI Whisper API for actual transcription
+- [ ] **File Processing**: Handle large file uploads and streaming
+- [ ] **URL Processing**: Download and process videos from web URLs
+- [ ] **Production Deployment**: Environment setup and scaling
+
+### 🏗️ **Current Architecture**
+- **Frontend**: Next.js 15 + React 19 + TypeScript + shadcn/ui
+- **Backend**: API Routes with server-side processing
+- **Mock Mode**: Realistic demo transcripts (no API keys required)
+- **Production Ready**: Architecture prepared for FFmpeg + Whisper integration
 
 ## Development
 
@@ -75,7 +98,7 @@ The main component is located at `src/components/video-caption-generator.tsx` an
 
 - **State Management**: React hooks for managing upload, processing, and results
 - **File Handling**: Drag & drop and file input for video uploads
-- **AI Integration**: OpenAI GPT-4 for caption generation and cleanup
+- **Mock Transcription**: Generates realistic demo captions for testing
 - **Format Conversion**: Utilities to convert transcripts to TXT and VTT formats
 
 ## Roadmap
@@ -132,6 +155,42 @@ Have an idea for a new feature? We'd love to hear it!
 - Describe your use case and expected behavior
 - Include mockups or examples if helpful
 
+## 🎯 Development Status
+
+**Current Phase**: Core functionality complete, ready for real data processing integration
+
+**Demo Status**: ✅ Fully functional with mock transcripts  
+**Production Ready**: 🚧 Architecture complete, needs FFmpeg + Whisper integration
+
+## Production Setup
+
+To enable **real transcription** capabilities, you'll need to integrate:
+
+### 1. Audio Extraction (FFmpeg)
+```bash
+# Install FFmpeg
+brew install ffmpeg  # macOS
+# or use Docker container with FFmpeg included
+```
+
+### 2. OpenAI Whisper API
+```bash
+# Add to .env.local
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+### 3. Update API Route
+Modify `/src/app/api/generate-captions/route.ts`:
+- Replace `generateMockTranscript()` with actual FFmpeg audio extraction
+- Use OpenAI Whisper API for speech-to-text transcription
+- See inline comments marked with `[MOCK MODE]` for integration points
+
+### 4. File Upload Handler
+Implement proper file upload handling:
+- Use `FormData` instead of JSON payload
+- Stream large files to disk/S3
+- Extract audio using FFmpeg child process
+
 ## Contributing
 
 Feel free to submit issues and enhancement requests! Check out our roadmap above for planned features you could help implement.
@@ -145,11 +204,7 @@ cd ai-generated-captions
 # Install dependencies
 pnpm install
 
-# Set up environment variables
-cp .env.local.example .env.local
-# Add your OpenAI API key
-
-# Start development server
+# Start development server (no API keys needed for mock mode)
 pnpm dev
 ```
 

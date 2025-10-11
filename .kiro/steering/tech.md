@@ -46,3 +46,11 @@ pnpm lint         # Run ESLint checks
 - **Import resolution**: Bundler-based module resolution
 - **CSS**: Global styles in `src/app/globals.css`
 - **Components**: shadcn/ui components in `src/components/ui/`
+## 
+Performance Optimization
+
+### AI Token Usage
+- **Default output format**: Plain text (.txt) to minimize AI processing
+- **Optional formats**: Users can select WebVTT (.vtt) when needed
+- **Format selection UI**: Checkbox or radio buttons for output preferences
+- **Token efficiency**: Generate only requested formats to reduce API costs

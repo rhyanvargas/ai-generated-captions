@@ -8,7 +8,8 @@ A Next.js web application that automatically generates video captions in multipl
 - Video file upload with drag-and-drop support
 - Video URL input for remote video processing
 - AI-powered transcription using OpenAI GPT-4
-- Dual format output (TXT and WebVTT)
+- Configurable output formats with .txt as default (reduces AI token usage)
+- Dual format output options (TXT and WebVTT)
 - Real-time progress tracking with smooth UI animations
 - Copy to clipboard and download functionality
 - Responsive design for desktop and mobile
